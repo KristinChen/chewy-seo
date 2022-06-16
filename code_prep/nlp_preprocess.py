@@ -16,7 +16,7 @@ stopwords=stopwords.words('english')
 def remove_punct(sentence):
     return re.sub(r'[^\w\s]','', sentence)
 
-### Extracting the root words (lemmatization?)
+### Extracting the root words (lemmatization?) - might take long time to run
 def root_words(sentence):
     doc = nlp(sentence)
     lemm_sent = []
@@ -24,7 +24,7 @@ def root_words(sentence):
         lemm_sent.append(token.lemma_)
     return ' '.join(lemm_sent)
 
-### Removing Accents
+### Removing Accents - might take long time to run
 def remove_accents(sentence):
     return unidecode.unidecode(sentence)
 
@@ -40,14 +40,14 @@ def remove_stopwords(sentence, stopwords=stopwords):
 def remove_spaces(sentence):
     return re.sub('\s{2,}', ' ', sentence).strip()
 
-### Clean typos
+### Clean typos - might take long time to run
 def clean_typos(sentence):
     correct_sent = ''
     for word in sentence.split():
         correct_sent += Word(word).correct() + ' '
     return correct_sent.strip()
 
-### number handling (1 -> one)
+### number handling (1 -> one) - might take long time to run
 def number_translate(sentence):
     p = inflect.engine()
     sent_split = sentence.split()
@@ -56,7 +56,7 @@ def number_translate(sentence):
             sent_split[i] = p.number_to_words(word)
     return ' '.join(sent_split)
 
-### Expand Contractions (don't -> do not)
+### Expand Contractions (don't -> do not) - might take long time to run
 def expand_contractions(sentence):
     return contractions.fix(sentence)
 
@@ -66,23 +66,7 @@ def tokenize(sentence):
 
 def standard_preprocess(sentence, stopword=stopwords):
     sentence = remove_punct(sentence)
-#     sentence = root_words(sentence)
     sentence = to_lower(sentence)
     sentence = remove_stopwords(sentence, stopword)
     sentence = remove_spaces(sentence)
-#     sentence = clean_typos(sentence)
-#     sentence = number_translate(sentence)
-#     sentence = expand_contractions(sentence)
     return sentence
-
-# punct_test = "Hello, I am Zach! Nice to meet you. Hello? ~"
-# accent_test = "orčpžsíáýd"
-# space_test = "   i  am zach.  xiong  ha     "
-# typo_test = 'appple bannana heello'
-# contractions_text = "I'm Zach. I've been study chinese for 1022 year. I'll go to US for my degree."
-# lemma_test = 'I joined WSP 2.5 years ago as a graduate engineer.'
-# print(remove_accents(accent_test), 'finished!!!')
-# punct_test = remove_punct(accent_test)
-# print(remove_stopwords(punct_test, ['you']))
-# print(root_words(lemma_test))
-# print(punct_test)

@@ -41,7 +41,7 @@ def show_wordcloud(data, background_color='white',
     plt.imshow(wordcloud)
     plt.show()
 
-def bubble_chart(bigram_df, top_n, bubble_spacing=0.001, COLOR=sns.color_palette("Paired").as_hex()):
+def show_bubble(bigram_df, top_n, bubble_spacing=0.001, COLOR=sns.color_palette("Paired").as_hex()):
     '''
     Function: Plot the bubble chart for Bigram
        Input: Bigram dataframe with frequence,
